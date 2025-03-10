@@ -38,8 +38,6 @@ tz = pytz.timezone('America/New_York')
 
 est = zoneinfo.ZoneInfo('US/Eastern')
 
-logger.warning(datetime.now().replace(tzinfo=est))
-
 @cached(cache=TTLCache(maxsize=2, ttl=3500))
 def get_token():
     client = BackendApplicationClient(client_id=libapps_client)
@@ -239,18 +237,9 @@ def build_space_response(locations):
 def check_if_available(from_date, to_date):
     to_date = datetime.fromisoformat(to_date)
     from_date = datetime.fromisoformat(from_date)
-    # curr_time = datetime.now() 
     cur = datetime.now(est)
 
-    logger.warning("from")
-    logger.warning(from_date)
-    logger.warning("to")
-    logger.warning(to_date)
-    logger.warning("cur loc")
-    logger.warning("cur")
-    logger.warning(cur)
     return from_date < cur < to_date
-    # return from_date < tz.localize(curr_time) < to_date
 
 
 def compare_dates(date_1, date_2):
