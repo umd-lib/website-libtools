@@ -1,0 +1,8 @@
+# LibApps Base
+LIBAPPS_BASE=https://umd.libcal.com/api/1.1
+
+# LibApps ClientID
+LIBAPPS_CLIENT=
+
+# LibApps Secret
+LIBAPPS_SECRET=
