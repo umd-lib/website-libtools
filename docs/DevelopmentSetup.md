@@ -15,31 +15,31 @@ See the following for setup instructions:
 * <https://github.com/pyenv/pyenv>
 * <https://github.com/pyenv/pyenv-virtualenv>
 
-Once "pyenv" and "pyenv-virtualenv" have been installed, install Python 3.10.8
+Once "pyenv" and "pyenv-virtualenv" have been installed, install Python 3.13.2
 
 ```bash
-$ pyenv install 3.10.8
+$ pyenv install 3.13.2
 ```
 
 ## Installation for development
 
-1) Clone the "library-monitors" Git repository:
+1) Clone the "website-libtools" Git repository:
 
 ```bash
-> git clone https://github.com/umd-lib/library-monitors.git
+> git clone https://github.com/umd-lib/website-libtools.git
 ```
 
-2) Switch to the "library-monitors" directory:
+2) Switch to the "website-libtools" directory:
 
 ```bash
-> cd library-monitors
+> cd website-libtools
 ```
 
 3) Set up the virtual environment:
 
 ```bash
-$ pyenv virtualenv 3.10.8 library-monitors
-$ pyenv shell library-monitors
+$ pyenv virtualenv 3.13.2 website-libtools
+$ pyenv shell website-libtools
 ```
 
 4) Run "pip install" to download dependencies:
@@ -59,7 +59,7 @@ $ cp env-template .env
 To start the app:
 
 ```bash
-$ python3 -m flask run
+$ fastapi dev main.py 
 ```
 
 ## Code Style
