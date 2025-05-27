@@ -1,5 +1,4 @@
 import requests
-import pytz
 import os
 import furl
 import logging
@@ -31,10 +30,6 @@ libapps_client = env['LIBAPPS_CLIENT']
 libapps_secret = env['LIBAPPS_SECRET']
 
 logger = logging.getLogger('website-libtools')
-
-tz = pytz.timezone('America/New_York')
-
-# tz = ZoneInfo('America/New_York')
 
 est = zoneinfo.ZoneInfo('US/Eastern')
 
@@ -207,22 +202,23 @@ def build_space_response(locations):
                     current_avail = int(current_subsec['available'])
                     current_total = int(current_subsec['total'])
                     current_next_avail = current_subsec['next_available']
-            if 'availability' in space and \
-                space['availability'][0] is not None and \
-                space['availability'][0]['to'] is not None:
-                to_date = space['availability'][0]['to']
-                from_date = space['availability'][0]['from']
-                current_total = current_total + 1
-                overall_total = overall_total + 1
-                if check_if_available(from_date, to_date):
-                    overall_avail = overall_avail + 1
-                    current_avail = current_avail + 1
-                current_subsec['available'] = str(current_avail)
-                current_subsec['total'] = str(current_total)
-                if current_next_avail is None:
-                    current_next_avail = from_date
-                elif compare_dates(current_next_avail, from_date):
-                    current_next_avail = from_date
+            if 'availability' in space:
+                for sp in space['availability']:
+                    if 'to' in sp:
+                        to_date = sp['to']
+                    if 'from' in sp:
+                        from_date = sp['from']
+                    current_total = current_total + 1
+                    overall_total = overall_total + 1
+                    if check_if_available(from_date, to_date):
+                        overall_avail = overall_avail + 1
+                        current_avail = current_avail + 1
+                    current_subsec['available'] = str(current_avail)
+                    current_subsec['total'] = str(current_total)
+                    if current_next_avail is None:
+                        current_next_avail = from_date
+                    elif compare_dates(current_next_avail, from_date):
+                        current_next_avail = from_date
 
     # Add last item to array
     if len(current_subsec) > 0:
