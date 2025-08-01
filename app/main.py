@@ -284,6 +284,14 @@ def app_stem_hours_today():
     return hours
 
 
+@libapps.get('/makerspace/hours/today')
+@cached(cache=TTLCache(maxsize=8, ttl=360))
+def app_makerspace_hours_today():
+    lid = '25040'
+    hours = app_hours(lid)
+    return hours
+
+
 @libapps.get('/mspal/details')
 def app_mspal_raw(availability='full'):
     return app_spaces('Michelle Smith', availability)
